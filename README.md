@@ -10,6 +10,9 @@ Challenge project that will force me to use a third-party API to interface with 
 *Third-party API : One Call API - weather data 
 
 ## Website
+https://agent-shields.github.io/Weather-Tracker/
+
+## Repository
 https://github.com/Agent-Shields/Weather-Tracker
 
 ## Screenshot
