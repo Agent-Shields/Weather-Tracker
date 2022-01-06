@@ -1,7 +1,7 @@
 # Weather-Tracker
 
 ## Purpose
-Challenge project that will force me to use a third-party API to interface with their data in order to make a simple weather tracking application. I also will need to use local storage to store persistent data and work with that data later.  
+Challenge project that will need me to use a third-party API to interface with their data in order to make a simple weather tracking application. I also will need to use local storage to store persistent data and work with that data later.  
 
 ## Built With
 *HTML
