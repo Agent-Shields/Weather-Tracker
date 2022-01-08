@@ -1,20 +1,30 @@
 // declaree HTML elements as vars
 
 var citySearched = document.querySelector("#city")
-console.log(citySearched);
+
 
 var searchButton = document.querySelector("#btnSearch")
-console.log(searchButton);
 
-// Add event for search click
+// define click handler 
 
-searchButton.addEventListener("click", function(){
-    console.log("clicked search");
-})
+var buttonClickHandler = function(event) {
+    // prevent page from refreshing
+    event.preventDefault();
+
+    // get value from search element
+    var cityName = citySearched.value.trim();
+   
+    if (cityName) {
+        console.log(cityName)
+        localStorage.setItem("cityNamed", cityName)
+        // get lat-lon of city named
+    } else {
+        alert("Please enter a city name in the search input field")
+    }
+}
+                                                                                                                                                                                                                                        
+// Add event listeners for search submit
+
+searchButton.addEventListener("click", buttonClickHandler)
 
 
-// var getWeather = function() {
-    
-// }
-
-// console.log(getWeather)
