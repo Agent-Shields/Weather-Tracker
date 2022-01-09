@@ -14,24 +14,40 @@ var buttonClickHandler = function(event) {
 
     // get value from search element
     var cityName = citySearched.value.trim();
-   
+
     if (cityName) {
         console.log(cityName);
-        localStorage.setItem("cityNamed", cityName);
+        localStorage.setItem("city", cityName);
 
-        // clear searched city from input field
+        // clear input field and focus
         citySearched.value = "";
         citySearched.focus();
-        // get lat-lon of city named
+
+        // fetch weather info of city named
+    var apiUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + weatherKey.apiKey
+    console.log(apiUrl);
+
+        // make a get request to url
+        fetch(apiUrl).then(function(response) {
+            if (response.ok) {
+                console.log(response);
+                response.json().then(function(data) {
+                    console.log(data)
+                })
+            } else {
+                alert ("There was a problem with your request!")
+            }
+        })
+
+        // add cityName to search history 
+    var searchHistoryItem = document.createElement("button");
+        searchHistoryItem.classList.add("btn", "btn-secondary");
+        searchHistoryItem.textContent = cityName;
+        searchHistoryList.appendChild(searchHistoryItem)
     } else {
         alert("Please enter a city name in the search input field");
     }
-
-    // add cityName to search history 
-    var searchHistoryItem = document.createElement("button");
-    searchHistoryItem.classList.add("btn", "btn-secondary");
-    searchHistoryItem.textContent = cityName;
-    searchHistoryList.appendChild(searchHistoryItem)
+    
 
 }
                                                                                                                                                                                                                                         
