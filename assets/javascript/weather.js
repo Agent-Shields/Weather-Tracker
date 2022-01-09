@@ -20,23 +20,23 @@ var buttonClickHandler = function(event) {
         localStorage.setItem("city", cityName);
 
         // fetch weather info of city named
-        var apiUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620"
+        var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620"
         console.log(apiUrl);
 
         // make a get request to url
         var getApiInfo = fetch(apiUrl)
-        console.log(getApiInfo)
+       
         
-        // .then(function(response) {
-        //     if (response.ok) {
-        //         console.log(response);
-        //         response.json().then(function(data) {
-        //             console.log(data)
-        //         })
-        //     } else {
-        //         alert ("There was a problem with your request!")
-        //     }
-        // })
+        getApiInfo.then(function(response) {
+            if (response.ok) {
+                console.log(response);
+                response.json().then(function(data) {
+                    console.log(data)
+                })
+            } else {
+                alert ("There was a problem with your request!")
+            }
+        })
 
         // add cityName to search history 
     var searchHistoryItem = document.createElement("button");
