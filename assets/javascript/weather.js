@@ -19,13 +19,9 @@ var buttonClickHandler = function(event) {
         console.log(cityName);
         localStorage.setItem("city", cityName);
 
-        // clear input field and focus
-        citySearched.value = "";
-        citySearched.focus();
-
         // fetch weather info of city named
-    var apiUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620"
-    console.log(apiUrl);
+        var apiUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620"
+        console.log(apiUrl);
 
         // make a get request to url
         fetch(apiUrl).then(function(response) {
@@ -48,6 +44,10 @@ var buttonClickHandler = function(event) {
         alert("Please enter a city name in the search input field");
     }
     
+    
+        // clear input field and focus
+        citySearched.value = "";
+        citySearched.focus();
 
 }
                                                                                                                                                                                                                                         
