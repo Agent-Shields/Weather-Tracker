@@ -24,16 +24,19 @@ var buttonClickHandler = function(event) {
         console.log(apiUrl);
 
         // make a get request to url
-        fetch(apiUrl).then(function(response) {
-            if (response.ok) {
-                console.log(response);
-                response.json().then(function(data) {
-                    console.log(data)
-                })
-            } else {
-                alert ("There was a problem with your request!")
-            }
-        })
+        var getApiInfo = fetch(apiUrl)
+        console.log(getApiInfo)
+        
+        // .then(function(response) {
+        //     if (response.ok) {
+        //         console.log(response);
+        //         response.json().then(function(data) {
+        //             console.log(data)
+        //         })
+        //     } else {
+        //         alert ("There was a problem with your request!")
+        //     }
+        // })
 
         // add cityName to search history 
     var searchHistoryItem = document.createElement("button");
