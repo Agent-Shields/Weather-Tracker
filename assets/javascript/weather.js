@@ -32,12 +32,22 @@ var buttonClickHandler = function(event) {
                 console.log(response);
                 response.json().then(function(data) {
                     console.log(data)
+
+                    // coord values for city requested
+                    console.log(data.coord)
+
+                    // set coord values for city requested 
+                    var cityLat = data.coord.lat 
+                    console.log(cityLat)
+                    var cityLon = data.coord.lon 
+                    console.log(cityLon)
+
                 })
             } else {
                 alert ("There was a problem with your request!")
             }
         })
-
+        
         // add cityName to search history 
     var searchHistoryItem = document.createElement("button");
         searchHistoryItem.classList.add("btn", "btn-secondary");
