@@ -6,26 +6,25 @@ var searchButton = document.querySelector("#btnSearch");
 
 var searchHistoryList = document.querySelector("#searchList")
 
-// define button click handler 
+// define search click handler 
 
-var buttonClickHandler = function(event) {
+var searchClickHandler = function(event) {
     // prevent page from refreshing
     event.preventDefault();
 
-    // get value from search element
+    // get city value from search element
     var cityName = citySearched.value.trim();
 
     if (cityName) {
         console.log(cityName);
         localStorage.setItem("city", cityName);
 
-        // fetch weather info of city named
+        // fetch current weather info of city named
         var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620"
         console.log(apiUrl);
 
         // make a get request to url
         var getApiInfo = fetch(apiUrl)
-       
         
         getApiInfo.then(function(response) {
             if (response.ok) {
@@ -38,10 +37,12 @@ var buttonClickHandler = function(event) {
 
                     // set coord values for city requested 
                     var cityLat = data.coord.lat 
+                    localStorage.setItem("cityLat", cityLat)
                     console.log(cityLat)
                     var cityLon = data.coord.lon 
+                    localStorage.setItem("cityLon", cityLon)
                     console.log(cityLon)
-
+                    oneCallApi(cityLat, cityLon)
                 })
             } else {
                 alert ("There was a problem with your request!")
@@ -57,15 +58,34 @@ var buttonClickHandler = function(event) {
         alert("Please enter a city name in the search input field");
     }
     
-    
         // clear input field and focus
         citySearched.value = "";
         citySearched.focus();
 
 }
+
+// define one call API function
+
+var oneCallApi = function(cityLat, cityLon) {
+
+    // define one Call Api url
+    var oneCallApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620"
+    console.log(oneCallApiUrl)
+    
+    // // make get request to url
+    var getOneCall = fetch(oneCallApiUrl)
+    getOneCall.then(function(response){
+        if (response.ok) {
+            console.log(response);
+            response.json().then(function(data){
+                console.log(data)
+            })
+        } else {
+            alert ("There was a problem with your request!") 
+        }
+    })
+}
                                                                                                                                                                                                                                         
 // Add event listeners for search submit
 
-searchButton.addEventListener("click", buttonClickHandler);
-
-
+searchButton.addEventListener("click", searchClickHandler);
