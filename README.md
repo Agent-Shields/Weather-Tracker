@@ -17,6 +17,7 @@ https://github.com/Agent-Shields/Weather-Tracker
 
 ## Screenshot
 Here will be an image of what this application should look like when finished
+![image](assets/images/WeatherTrackerProof.PNG)
 
 ## Definition of Done
 
