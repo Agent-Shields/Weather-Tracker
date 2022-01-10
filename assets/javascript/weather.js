@@ -60,6 +60,7 @@ var searchClickHandler = function(event) {
         // add cityName to search history 
     var searchHistoryItem = document.createElement("button");
         searchHistoryItem.classList.add("btn", "btn-secondary");
+        searchHistoryItem.id = "searchHistoryButton"
         searchHistoryItem.textContent = cityName;
         searchHistoryList.appendChild(searchHistoryItem);
     } else {
@@ -156,8 +157,59 @@ var oneCallApi = function(cityLat, cityLon) {
     })
 }
 
+var searchHistoryClickHandler = function(){
+
+    console.log("History item clicked")
+
+    // if (curWeatherEl.hasChildNodes()){
+    //     curWeatherEl.removeChild(curWeatherEl.firstElementChild)
+    // }
+
+    // var getCityName = textContent;
+    // console.log(getCityName);
+
+    // localStorage.setItem("city", getCityName);
+
+    // // fetch current weather info of city named
+    // var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + getCityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620";
+
+    //  // make a get request to url
+    //  var getApiInfo = fetch(apiUrl);
+
+    //  getApiInfo.then(function(response) {
+    //     if (response.ok) {
+    //         console.log(response);
+    //         response.json().then(function(data) {
+    //             console.log(data);
+
+    //             // coord values for city requested
+    //             console.log(data.coord);
+
+    //             // set coord values for city requested 
+    //             var cityLat = data.coord.lat ;
+    //             localStorage.setItem("cityLat", cityLat);
+    //             console.log(cityLat);
+    //             var cityLon = data.coord.lon ;
+    //             localStorage.setItem("cityLon", cityLon);
+    //             console.log(cityLon);
+
+    //             oneCallApi(cityLat, cityLon);
+    //         })
+    //     }
+    // })
+
+};
+
 
                                                                                                                                                                                                                                         
 // Add event listeners for search submit
 
 searchButton.addEventListener("click", searchClickHandler);
+
+// add event listener for search history click
+
+document.addEventListener("click", function(e){
+    if (e.target && e.target.id == "searchHistoryButton"){
+        searchHistoryClickHandler();
+    }
+});

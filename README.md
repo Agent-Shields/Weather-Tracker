@@ -37,5 +37,9 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
+## Work To-Do 
+
+This challenge is incomplete, I still need to add the 5 day forecast and the ability to get weather forecast from the search history list. I will be resubmitting at a later time.
+
 ## Contribution
 Made with ❤️ by Johnathan Shields 
