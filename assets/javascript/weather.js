@@ -214,7 +214,7 @@ document.addEventListener("click", function(e){
             localStorage.setItem("city", getCityName);
         
             // fetch current weather info of city named
-            var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + getCityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620";
+            var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + getCityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620";
         
              // make a get request to url
              var getApiInfo = fetch(apiUrl);
