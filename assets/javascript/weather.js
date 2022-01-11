@@ -8,6 +8,8 @@ var searchHistoryList = document.querySelector("#searchList");
 
 var curWeatherEl = document.querySelector("#curWeather");
 
+var searchHistoryListArr = [];
+
 // define search click handler 
 
 var searchClickHandler = function(event) {
@@ -62,6 +64,7 @@ var searchClickHandler = function(event) {
         searchHistoryItem.classList.add("btn", "btn-secondary");
         searchHistoryItem.id = "searchHistoryButton"
         searchHistoryItem.textContent = cityName;
+        searchHistoryListArr.push(cityName)
         searchHistoryList.appendChild(searchHistoryItem);
     } else {
         alert("Please enter a city name in the search input field");
@@ -84,7 +87,7 @@ var oneCallApi = function(cityLat, cityLon) {
 
     // get city value from search element
 
-    var cityName = citySearched.value.trim();
+    var cityName = localStorage.getItem("city");
 
     getOneCall.then(function(response){
         if (response.ok) {
@@ -157,50 +160,6 @@ var oneCallApi = function(cityLat, cityLon) {
     })
 }
 
-var searchHistoryClickHandler = function(){
-
-    console.log("History item clicked")
-
-    // if (curWeatherEl.hasChildNodes()){
-    //     curWeatherEl.removeChild(curWeatherEl.firstElementChild)
-    // }
-
-    // var getCityName = textContent;
-    // console.log(getCityName);
-
-    // localStorage.setItem("city", getCityName);
-
-    // // fetch current weather info of city named
-    // var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + getCityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620";
-
-    //  // make a get request to url
-    //  var getApiInfo = fetch(apiUrl);
-
-    //  getApiInfo.then(function(response) {
-    //     if (response.ok) {
-    //         console.log(response);
-    //         response.json().then(function(data) {
-    //             console.log(data);
-
-    //             // coord values for city requested
-    //             console.log(data.coord);
-
-    //             // set coord values for city requested 
-    //             var cityLat = data.coord.lat ;
-    //             localStorage.setItem("cityLat", cityLat);
-    //             console.log(cityLat);
-    //             var cityLon = data.coord.lon ;
-    //             localStorage.setItem("cityLon", cityLon);
-    //             console.log(cityLon);
-
-    //             oneCallApi(cityLat, cityLon);
-    //         })
-    //     }
-    // })
-
-};
-
-
                                                                                                                                                                                                                                         
 // Add event listeners for search submit
 
@@ -209,7 +168,48 @@ searchButton.addEventListener("click", searchClickHandler);
 // add event listener for search history click
 
 document.addEventListener("click", function(e){
-    if (e.target && e.target.id == "searchHistoryButton"){
+    if (e.target && e.target.id == "searchHistoryButton") {
+        var searchHistoryClickHandler = function(){
+        
+            if (curWeatherEl.hasChildNodes()){
+                curWeatherEl.removeChild(curWeatherEl.firstElementChild)
+            }
+        
+            var getCityName = e.target.textContent;
+            console.log(getCityName);
+        
+            localStorage.setItem("city", getCityName);
+        
+            // fetch current weather info of city named
+            var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + getCityName + "&appid=8b2ff7d80fb33fb5fa7171ccd4d16620";
+        
+             // make a get request to url
+             var getApiInfo = fetch(apiUrl);
+        
+             getApiInfo.then(function(response) {
+                if (response.ok) {
+                    console.log(response);
+                    response.json().then(function(data) {
+                        console.log(data);
+        
+                        // coord values for city requested
+                        console.log(data.coord);
+        
+                        // set coord values for city requested 
+                        var cityLat = data.coord.lat ;
+                        localStorage.setItem("cityLat", cityLat);
+                        console.log(cityLat);
+                        var cityLon = data.coord.lon ;
+                        localStorage.setItem("cityLon", cityLon);
+                        console.log(cityLon);
+        
+                        oneCallApi(cityLat, cityLon);
+                    })
+                }
+            })
+        
+        };
+        
         searchHistoryClickHandler();
     }
 });
