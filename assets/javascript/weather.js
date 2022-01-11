@@ -144,10 +144,29 @@ var oneCallApi = function(cityLat, cityLon) {
                 curWeatherHumidity.textContent = "Humidity: " + data.current.humidity + " %";
                 curWeatherHeader.appendChild(curWeatherHumidity);
 
+
+                if (data.current.uvi <= 3) {
+
                 var curWeatherUVI = document.createElement("p");
-                curWeatherUVI.classList.add("fs-2", "fw-normal");
+                curWeatherUVI.classList.add("fs-2", "fw-normal", "bg-success");
                 curWeatherUVI.textContent = "UV Index: " + data.current.uvi;
                 curWeatherHeader.appendChild(curWeatherUVI);
+
+                } else if (data.current.uvi > 3 && data.current.uvi < 6) {
+
+                var curWeatherUVI = document.createElement("p");
+                curWeatherUVI.classList.add("fs-2", "fw-normal", "bg-warning");
+                curWeatherUVI.textContent = "UV Index: " + data.current.uvi;
+                curWeatherHeader.appendChild(curWeatherUVI);
+
+                } else if (data.current.uvi > 6) {
+
+                var curWeatherUVI = document.createElement("p");
+                curWeatherUVI.classList.add("fs-2", "fw-normal", "bg-danger");
+                curWeatherUVI.textContent = "UV Index: " + data.current.uvi;
+                curWeatherHeader.appendChild(curWeatherUVI);
+
+                }
 
             })
         } else {
