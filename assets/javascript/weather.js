@@ -8,6 +8,8 @@ var searchHistoryList = document.querySelector("#searchList");
 
 var curWeatherEl = document.querySelector("#curWeather");
 
+var futureWeatherEl = document.querySelector("#weeklyForecast")
+
 // define search click handler 
 
 var searchClickHandler = function(event) {
@@ -17,6 +19,11 @@ var searchClickHandler = function(event) {
     if (curWeatherEl.hasChildNodes()){
         curWeatherEl.removeChild(curWeatherEl.firstElementChild)
     }
+
+    if (futureWeatherEl.hasChildNodes()) {
+        futureWeatherEl.removeChild(futureWeatherEl.firstElementChild);
+    }
+ 
 
     // get city value from search element
 
@@ -179,8 +186,52 @@ var oneCallApi = function(cityLat, cityLon) {
                 curWeatherUVIValue.textContent = data.current.uvi;
                 curWeatherUVIEl.appendChild(curWeatherUVIValue);
 
-
                 }
+
+                 // populate weather forecast cards
+
+                 var futureWeatherHeaderEl = document.createElement("h1")
+                 futureWeatherHeaderEl.classList.add("fs-3", "fw-bold", "ps-1", "d-flex", "flex-row");
+                 futureWeatherHeaderEl.textContent = "5-Day Forecast:";
+                 futureWeatherEl.appendChild(futureWeatherHeaderEl);
+                 
+                 var i = 0
+                 for (i=0; i < 5;) {
+
+                    // Get next 5 days
+                    var getDay = data.daily[i+1].dt
+
+                    // date object based on unix timestamp
+                    var weekDayTime = new Date(getDay * 1000);
+
+                    // get current date
+                    var weekDayDate = weekDayTime.getDate();
+
+                    // get current month
+                    var weekDayMonth = weekDayTime.getMonth() + 1;
+
+                    // get current year
+                    var weekDayYear = weekDayTime.getFullYear();    
+
+                    //format week day date
+                    var formatWeekDayDate = weekDayMonth + " / " + weekDayDate + " / " + weekDayYear;
+
+                    console.log(formatWeekDayDate);
+
+                    // define data for each day
+                    console.log(data.daily[i+1].temp.day);
+
+                    // create card for date
+                    var dateCard = document.createElement("div")
+                    // dateCard.style = "width"
+                    dateCard.classList.add("bg-primary", "col")
+                    dateCard.textContent = "placeholder";
+                    futureWeatherEl.appendChild(dateCard);
+                    
+                    i++;
+                 }
+ 
+ 
 
             })
         } else {
@@ -205,7 +256,11 @@ document.addEventListener("click", function(e){
         var searchHistoryClickHandler = function(){
         
             if (curWeatherEl.hasChildNodes()){
-                curWeatherEl.removeChild(curWeatherEl.firstElementChild)
+                curWeatherEl.removeChild(curWeatherEl.firstElementChild);
+            }
+
+            if (futureWeatherEl.hasChildNodes()) {
+                futureWeatherEl.removeChild(futureWeatherEl.firstElementChild);
             }
         
             var getCityName = e.target.textContent;
