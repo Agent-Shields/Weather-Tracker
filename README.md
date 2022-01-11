@@ -40,7 +40,7 @@ THEN I am again presented with current and future conditions for that city
 
 ## Work To-Do 
 
-This challenge is incomplete, I still need to add the 5 day forecast and the ability to get weather forecast from the search history list. I will be resubmitting at a later time.
+This challenge is incomplete, I still need to add the 5 day forecast. I will be resubmitting at a later time.
 
 ## Contribution
 Made with ❤️ by Johnathan Shields 

@@ -8,8 +8,6 @@ var searchHistoryList = document.querySelector("#searchList");
 
 var curWeatherEl = document.querySelector("#curWeather");
 
-var searchHistoryListArr = [];
-
 // define search click handler 
 
 var searchClickHandler = function(event) {
@@ -51,21 +49,21 @@ var searchClickHandler = function(event) {
                     var cityLon = data.coord.lon ;
                     localStorage.setItem("cityLon", cityLon);
                     console.log(cityLon);
+                    
+                     // add cityName to search history 
+                    var searchHistoryItem = document.createElement("button");
+                    searchHistoryItem.classList.add("btn", "btn-secondary");
+                    searchHistoryItem.id = "searchHistoryButton"
+                    searchHistoryItem.textContent = cityName;
+                    searchHistoryList.appendChild(searchHistoryItem);
 
                     oneCallApi(cityLat, cityLon);
                 })
             } else {
                 alert ("There was a problem with your current weather request!");
             }
-        })
-        
-        // add cityName to search history 
-    var searchHistoryItem = document.createElement("button");
-        searchHistoryItem.classList.add("btn", "btn-secondary");
-        searchHistoryItem.id = "searchHistoryButton"
-        searchHistoryItem.textContent = cityName;
-        searchHistoryListArr.push(cityName)
-        searchHistoryList.appendChild(searchHistoryItem);
+        }) 
+           
     } else {
         alert("Please enter a city name in the search input field");
     }
@@ -147,24 +145,40 @@ var oneCallApi = function(cityLat, cityLon) {
 
                 if (data.current.uvi <= 3) {
 
-                var curWeatherUVI = document.createElement("p");
-                curWeatherUVI.classList.add("fs-2", "fw-normal", "bg-success");
-                curWeatherUVI.textContent = "UV Index: " + data.current.uvi;
-                curWeatherHeader.appendChild(curWeatherUVI);
+                var curWeatherUVIEl = document.createElement("p");
+                curWeatherUVIEl.classList.add("fs-2", "fw-normal");
+                curWeatherUVIEl.textContent = "UV Index: ";
+                curWeatherHeader.appendChild(curWeatherUVIEl);
+
+                var curWeatherUVIValue = document.createElement("button");
+                curWeatherUVIValue.classList.add("fs-2", "fw-normal", "btn", "btn-success");
+                curWeatherUVIValue.textContent = data.current.uvi;
+                curWeatherUVIEl.appendChild(curWeatherUVIValue);
 
                 } else if (data.current.uvi > 3 && data.current.uvi < 6) {
 
-                var curWeatherUVI = document.createElement("p");
-                curWeatherUVI.classList.add("fs-2", "fw-normal", "bg-warning");
-                curWeatherUVI.textContent = "UV Index: " + data.current.uvi;
-                curWeatherHeader.appendChild(curWeatherUVI);
+                var curWeatherUVIEl = document.createElement("p");
+                curWeatherUVIEl.classList.add("fs-2", "fw-normal");
+                curWeatherUVIEl.textContent = "UV Index: ";
+                curWeatherHeader.appendChild(curWeatherUVIEl);
+
+                var curWeatherUVIValue = document.createElement("button");
+                curWeatherUVIValue.classList.add("fs-2", "fw-normal", "btn", "btn-warning");
+                curWeatherUVIValue.textContent = data.current.uvi;
+                curWeatherUVIEl.appendChild(curWeatherUVIValue);
 
                 } else if (data.current.uvi > 6) {
 
-                var curWeatherUVI = document.createElement("p");
-                curWeatherUVI.classList.add("fs-2", "fw-normal", "bg-danger");
-                curWeatherUVI.textContent = "UV Index: " + data.current.uvi;
-                curWeatherHeader.appendChild(curWeatherUVI);
+                var curWeatherUVIEl = document.createElement("p");
+                curWeatherUVIEl.classList.add("fs-2", "fw-normal");
+                curWeatherUVIEl.textContent = "UV Index: ";
+                curWeatherHeader.appendChild(curWeatherUVIEl);
+
+                var curWeatherUVIValue = document.createElement("button");
+                curWeatherUVIValue.classList.add("fs-2", "fw-normal","btn", "btn-danger");
+                curWeatherUVIValue.textContent = data.current.uvi;
+                curWeatherUVIEl.appendChild(curWeatherUVIValue);
+
 
                 }
 
