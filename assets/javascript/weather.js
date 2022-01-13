@@ -64,6 +64,18 @@ var searchClickHandler = function(event) {
                     searchHistoryItem.textContent = cityName;
                     searchHistoryList.appendChild(searchHistoryItem);
 
+                    var cityObj = {
+                        city : cityName,
+                        lat : cityLat,
+                        lon : cityLon,
+                    }
+
+                    var cityObjArr = JSON.parse(localStorage.getItem("cityObjArr")) || [] ;
+                
+                    cityObjArr.push(cityObj);
+
+                    localStorage.setItem("cityObjArr", JSON.stringify(cityObjArr))
+                    
                     oneCallApi(cityLat, cityLon);
                 })
             } else {
@@ -285,12 +297,14 @@ document.addEventListener("click", function(e){
         
                         // set coord values for city requested 
                         var cityLat = data.coord.lat ;
-                        localStorage.setItem("cityLat", cityLat);
-                        console.log(cityLat);
+                        // localStorage.setItem("cityLat", cityLat);
+                        // console.log(cityLat);
                         var cityLon = data.coord.lon ;
-                        localStorage.setItem("cityLon", cityLon);
-                        console.log(cityLon);
-        
+                        // localStorage.setItem("cityLon", cityLon);
+                        // console.log(cityLon);
+
+                        // create local storage object
+                   
                         oneCallApi(cityLat, cityLon);
                     })
                 }
